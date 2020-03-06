@@ -1,5 +1,8 @@
 name: "String Replace"
 description: "Find and replace a string in your project files"
+branding:
+    icon: "underline"
+    color: "black"
 author: "Ahmad Ainul Rizki"
 inputs:
   include:
