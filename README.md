@@ -31,8 +31,8 @@ jobs:
 
 | Input                                             | Description                                        |
 |------------------------------------------------------|-----------------------------------------------|
-| `find`  | A string to find and replace in your project files.   |
-| `replace`  | The string to replace it with.   |
+| `find`  | A string to find and replace in your project files. _(This can be a regular expression)_   |
+| `replace`  | The string to replace it with.   
 | `include` _(optional)_  | A regular expression of files to include. _Defaults to `.*`._    |
 | `exclude` _(optional)_  | A regular expression of files to exclude. _Defaults to `.git/`._    |
 
