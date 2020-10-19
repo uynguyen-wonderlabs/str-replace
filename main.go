@@ -35,43 +35,43 @@ func doesFileMatch(path string, include string, exclude string) bool {
 	return false
 }
 
-func findAndReplace(path string, find string, replace string) (bool, error) {
-	if find != replace {
+func findString(path string, find string) ([]string, error) {
+	if len(find) > 0 {
 		read, readErr := ioutil.ReadFile(path)
 		check(readErr)
 
 		re := regexp.MustCompile(find)
-		newContents := re.ReplaceAllString(string(read), replace)
-
-		if newContents != string(read) {
-			writeErr := ioutil.WriteFile(path, []byte(newContents), 0)
-			check(writeErr)
-			return true, nil
+		results := re.FindAllString(string(read), -1)
+		
+		if len(results) > 0 {
+			return results, nil
 		}
 	}
 
-	return false, nil
+	return []string{}, nil
 }
 
 func main() {
 	include := os.Getenv("INPUT_INCLUDE")
 	exclude := os.Getenv("INPUT_EXCLUDE")
 	find := os.Getenv("INPUT_FIND")
-	replace := os.Getenv("INPUT_REPLACE")
 
 	files, filesErr := listFiles(include, exclude)
 	check(filesErr)
 
-	modifiedCount := 0
+	finalResultArray := []string {}
+	fileFoundCount := 0
 
 	for _, path := range files {
-		modified, findAndReplaceErr := findAndReplace(path, find, replace)
-		check(findAndReplaceErr)
+		findingResult, findErr := findString(path, find)
+		check(findErr)
 
-		if modified {
-			modifiedCount++
+		if len(findingResult) > 0 {
+			finalResultArray = append(finalResultArray, findingResult)
+			fileFoundCount++
 		}
 	}
 
-	fmt.Println(fmt.Sprintf(`::set-output name=modifiedFiles::%d`, modifiedCount))
+	fmt.Println(fmt.Sprintf(`::set-output name=fileFoundCount::%d`, fileFoundCount))
+	fmt.Println(fmt.Sprintf(`::set-output name=resultArray::%v`, finalResultArray))
 }
