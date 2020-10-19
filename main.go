@@ -67,7 +67,7 @@ func main() {
 		check(findErr)
 
 		if len(findingResult) > 0 {
-			finalResultArray = append(finalResultArray, findingResult)
+			finalResultArray = append(finalResultArray, findingResult...)
 			fileFoundCount++
 		}
 	}
