@@ -71,7 +71,7 @@ func main() {
 			fileFoundCount++
 		}
 	}
-	finalResultArray = ["uy nguyen", "minh thi"]
+	finalResultArrayTemp := []string {"uy nguyen", "minh thi"}
 	fmt.Println(fmt.Sprintf(`::set-output name=fileFoundCount::%d`, fileFoundCount))
-	fmt.Println(fmt.Sprintf(`::set-output name=resultArray::%v`, finalResultArray))
+	fmt.Println(fmt.Sprintf(`::set-output name=resultArray::%v`, finalResultArrayTemp))
 }
