@@ -71,7 +71,10 @@ func main() {
 			fileFoundCount++
 		}
 	}
-	finalResultArrayTemp := []string {"uy nguyen", "minh thi"}
+	semiformat := fmt.Sprintf("%q\n", finalResultArray) // Turn the slice into a string that looks like ["one" "two" "three"]
+	tokens := strings.Split(semiformat, " ")	// Split this string by spaces
+	finalResults := strings.Join(tokens, ", ")
+	
 	fmt.Println(fmt.Sprintf(`::set-output name=fileFoundCount::%d`, fileFoundCount))
-	fmt.Println(fmt.Sprintf(`::set-output name=resultArray::%v`, finalResultArrayTemp))
+	fmt.Println(fmt.Sprintf(`::set-output name=resultArray::%v`, finalResults))
 }
